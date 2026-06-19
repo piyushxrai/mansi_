@@ -407,7 +407,6 @@ function buildTulips() {
   const field = document.getElementById('tulipField');
   field.innerHTML = '';
 
-  // Each group: array of { emoji, size } where size is 'tall'|'med'|'short'
   const groups = [
     [ {e:'🌷',s:'short'}, {e:'🌷',s:'tall'}, {e:'🌸',s:'med'} ],
     [ {e:'🌷',s:'med'},   {e:'🌷',s:'tall'}, {e:'🌷',s:'med'}, {e:'🌸',s:'short'} ],
@@ -419,7 +418,7 @@ function buildTulips() {
 
   let globalIdx = 0;
 
-  groups.forEach((groupDef, gi) => {
+  groups.forEach((groupDef) => {
     const groupEl = document.createElement('div');
     groupEl.classList.add('tulip-group');
 
@@ -440,11 +439,12 @@ function buildTulips() {
       const delay = globalIdx * 0.11;
       tulip.style.animationDelay = delay + 's';
 
-      /* After grow animation finishes, add sway */
+      /* Once growUp finishes, switch to sway — tulip stays visible */
+      const growDuration = 1300 + delay * 1000;
       setTimeout(() => {
-        tulip.style.animation = `sway ${2.4 + Math.random() * 1.2}s ease-in-out infinite`;
+        tulip.classList.add('grown');
         tulip.style.animationDelay = (Math.random() * 0.8) + 's';
-      }, (1300 + delay * 1000));
+      }, growDuration);
 
       groupEl.appendChild(tulip);
       globalIdx++;
