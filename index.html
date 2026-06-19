@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Mansi ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==================== WELCOME ==================== -->
+  <section id="welcomeScreen" class="screen active">
+    <div class="stars"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="welcome-content">
+      <div class="hi-wrap">
+        <h1 id="welcomeText">Hiiiii...</h1>
+        <span class="sparkle-row">✨ ✨ ✨</span>
+      </div>
+      <button id="startBtn" class="magicBtn pink-btn">Let's Go &nbsp;→</button>
+    </div>
+  </section>
+
+  <!-- ==================== CAKE ==================== -->
+  <section id="cakeScreen" class="screen">
+    <div class="cake-wrapper">
+      <h2 class="cake-title">Make a wish, Birthday Girl 🎂</h2>
+      <p class="cakeHint">Rub the flames to blow 🌬️</p>
+
+      <div class="cake-scene">
+        <div class="cake">
+          <div class="cake-deco">🎀</div>
+          <div class="candles-on-cake">
+            <div class="candle"><div class="flame" data-id="0"></div></div>
+            <div class="candle"><div class="flame" data-id="1"></div></div>
+            <div class="candle"><div class="flame" data-id="2"></div></div>
+            <div class="candle"><div class="flame" data-id="3"></div></div>
+            <div class="candle"><div class="flame" data-id="4"></div></div>
+          </div>
+          <div class="layer top"></div>
+          <div class="layer middle"></div>
+          <div class="layer bottom"></div>
+        </div>
+      </div>
+
+      <div id="wishText" class="wish-msg hidden">✨ Your wish is sent to the stars ✨</div>
+      <button id="cakeContinue" class="magicBtn pink-btn hidden">Let's Move 🌟</button>
+    </div>
+  </section>
+
+  <!-- ==================== FIREWORKS ==================== -->
+  <section id="fireworkScreen" class="screen">
+    <canvas id="fireworksCanvas"></canvas>
+    <div class="fireworkContent">
+      <h1 id="birthdayHeading"></h1>
+      <button id="fireworkContinue" class="magicBtn white-btn hidden">Next →</button>
+    </div>
+  </section>
+
+  <!-- ==================== GARDEN ==================== -->
+  <section id="gardenScreen" class="screen">
+    <div class="sky-bg"></div>
+    <div class="garden-overlay">
+      <div id="gardenText" class="garden-text"></div>
+      <button id="gardenContinue" class="magicBtn green-btn hidden">One Last Thing 💫</button>
+    </div>
+    <div class="petals-layer"></div>
+    <div class="tulipField" id="tulipField"></div>
+  </section>
+
+  <!-- ==================== FINAL ==================== -->
+  <section id="finalScreen" class="screen">
+    <div class="final-stars"></div>
+    <div class="glassCard">
+      <h1 class="finalTitle">For You ❤️</h1>
+      <div id="finalText" class="final-text"></div>
+      <div id="finalLove" class="final-love hidden">Thank you with Lots Of Love 🫶</div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+}
+
+/* ============================================================
+   SCREENS
+   ============================================================ */
+.screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.screen.active { display: flex; }
+
+.hidden { display: none !important; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.magicBtn {
+  border: none;
+  outline: none;
+  padding: 15px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.04em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.magicBtn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: rgba(255,255,255,0.25);
+  transform: skewX(-20deg);
+  transition: left 0.4s ease;
+}
+
+.magicBtn:hover::after { left: 130%; }
+
+.magicBtn:hover {
+  transform: translateY(-4px) scale(1.04);
+}
+
+.pink-btn {
+  background: linear-gradient(135deg, #ff6fa8, #ff3375);
+  color: white;
+  box-shadow: 0 6px 25px rgba(255,80,140,0.45);
+}
+.pink-btn:hover { box-shadow: 0 12px 35px rgba(255,80,140,0.6); }
+
+.white-btn {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(8px);
+}
+.white-btn:hover { box-shadow: 0 8px 28px rgba(255,255,255,0.2); }
+
+.green-btn {
+  background: linear-gradient(135deg, #56ab2f, #a8e063);
+  color: white;
+  box-shadow: 0 6px 25px rgba(86,171,47,0.4);
+}
+
+/* ============================================================
+   WELCOME SCREEN
+   ============================================================ */
+#welcomeScreen {
+  background: linear-gradient(145deg, #1a0533 0%, #3d0f5e 40%, #6b1a7a 70%, #c2185b 100%);
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px);
+  background-size: 55px 55px, 30px 30px;
+  background-position: 0 0, 15px 15px;
+  opacity: 0.3;
+  animation: moveStars 30s linear infinite;
+}
+
+@keyframes moveStars {
+  from { transform: translateY(0); }
+  to   { transform: translateY(80px); }
+}
+
+.floating-hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.heart-particle {
+  position: absolute;
+  bottom: -50px;
+  font-size: 1.4rem;
+  animation: floatUp linear infinite;
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.hi-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#welcomeText {
+  font-family: 'Great Vibes', cursive;
+  font-size: 6rem;
+  color: #fff;
+  text-shadow:
+    0 0 20px rgba(255,180,220,0.9),
+    0 0 50px rgba(255,100,180,0.6),
+    0 0 90px rgba(200,50,150,0.4);
+  animation: floatBob 3s ease-in-out infinite;
+}
+
+.sparkle-row {
+  font-size: 1.8rem;
+  animation: sparkleFlash 2s ease-in-out infinite;
+}
+
+@keyframes sparkleFlash {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.15); }
+}
+
+.welcome-sub {
+  color: rgba(255,220,240,0.9);
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+@keyframes floatBob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+/* ============================================================
+   CAKE SCREEN
+   ============================================================ */
+#cakeScreen {
+  background: linear-gradient(160deg, #2d0a4e 0%, #5c1068 35%, #a0296e 70%, #d4548a 100%);
+}
+
+.cake-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 2;
+}
+
+.cake-title {
+  font-family: 'Lora', serif;
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,180,220,0.7);
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+/* Cake scene */
+.cake-scene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cake {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  filter: drop-shadow(0 10px 30px rgba(255,80,140,0.5));
+}
+
+/* cakeHint sits above the cake with enough z-index to not be covered */
+.cakeHint {
+  color: rgba(255,220,240,0.95);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  animation: pulseHint 2s ease-in-out infinite;
+  position: relative;
+  z-index: 10;
+  background: rgba(0,0,0,0.18);
+  padding: 6px 18px;
+  border-radius: 20px;
+}
+
+.cake-deco {
+  font-size: 2rem;
+  margin-bottom: 4px;
+  animation: floatBob 2.5s ease-in-out infinite;
+}
+
+.layer {
+  border-radius: 14px;
+  position: relative;
+}
+
+.top {
+  width: 180px;
+  height: 55px;
+  background: linear-gradient(135deg, #ffd6e8, #ffaecf);
+  border-top: 3px solid rgba(255,255,255,0.5);
+}
+
+.middle {
+  width: 230px;
+  height: 70px;
+  background: linear-gradient(135deg, #ff94c2, #ff5fa0);
+  border-top: 3px solid rgba(255,255,255,0.3);
+}
+
+.bottom {
+  width: 275px;
+  height: 85px;
+  background: linear-gradient(135deg, #e83e8c, #c0206e);
+  border-top: 3px solid rgba(255,255,255,0.2);
+}
+
+/* Candles — sit directly on top of the cake's top layer */
+.candles-on-cake {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  width: 160px;
+  margin: 0 auto -2px auto; /* overlap slightly onto top layer */
+  position: relative;
+  z-index: 5;
+}
+
+.candle {
+  width: 11px;
+  height: 55px;
+  background: linear-gradient(to right, #fff5cc, #ffe680, #fff5cc);
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.flame {
+  width: 22px;
+  height: 32px;
+  background: radial-gradient(ellipse at 50% 80%, #fff 0%, #ffe066 30%, #ff9900 65%, rgba(255,60,0,0) 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: absolute;
+  top: -34px;
+  left: -5.5px;
+  cursor: pointer;
+  box-shadow:
+    0 0 8px 4px rgba(255,200,0,0.7),
+    0 0 20px 6px rgba(255,140,0,0.5),
+    0 0 35px 8px rgba(255,80,0,0.3);
+  animation: flicker 0.25s ease-in-out infinite alternate;
+  transition: opacity 0.3s ease;
+  /* Large touch/hover area via pseudo-element */
+}
+
+.flame::before {
+  content: '';
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+}
+
+@keyframes flicker {
+  0%   { transform: scaleX(1)   scaleY(1)   rotate(-2deg); }
+  33%  { transform: scaleX(1.1) scaleY(0.95) rotate(2deg);  }
+  66%  { transform: scaleX(0.9) scaleY(1.05) rotate(-1deg); }
+  100% { transform: scaleX(1.05) scaleY(1.08) rotate(1deg); }
+}
+
+.flame.blown {
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* smoke puff */
+.smoke {
+  position: absolute;
+  top: -38px;
+  left: -3px;
+  width: 12px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(200,200,200,0.6);
+  animation: smokePuff 1s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes smokePuff {
+  0%   { transform: translateY(0)   scale(0.5); opacity: 0.7; }
+  100% { transform: translateY(-35px) scale(2);   opacity: 0;   }
+}
+
+.wish-msg {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-shadow: 0 0 18px rgba(255,180,220,0.9);
+  animation: floatBob 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   FIREWORK SCREEN
+   ============================================================ */
+#fireworkScreen { background: #000; }
+
+#fireworksCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fireworkContent {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+#birthdayHeading {
+  font-family: 'Great Vibes', cursive;
+  font-size: 5rem;
+  color: #fff;
+  white-space: pre-line;
+  text-shadow:
+    0 0 10px rgba(255,100,180,0.9),
+    0 0 25px rgba(255,100,180,0.7),
+    0 0 55px rgba(255,50,150,0.5),
+    0 0 90px rgba(200,0,120,0.3);
+  line-height: 1.3;
+}
+
+/* ============================================================
+   GARDEN SCREEN
+   ============================================================ */
+#gardenScreen {
+  background: linear-gradient(to bottom, #87ceeb 0%, #5db86a 45%, #2e7d3a 100%);
+  overflow: hidden;
+  justify-content: flex-start;
+  padding-top: 40px;
+}
+
+.sky-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 15%, rgba(255,240,200,0.4) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 10%, rgba(255,220,180,0.3) 0%, transparent 35%);
+}
+
+.garden-overlay {
+  position: relative;
+  z-index: 5;
+  max-width: 800px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.garden-title {
+  font-family: 'Lora', serif;
+  font-size: 2.4rem;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0,80,20,0.5), 0 0 40px rgba(255,255,255,0.3);
+}
+
+.garden-text {
+  color: #fff;
+  font-size: 1.2rem;
+  line-height: 2;
+  min-height: 200px;
+  text-shadow: 0 1px 8px rgba(0,60,20,0.6);
+  font-style: italic;
+  font-family: 'Lora', serif;
+}
+
+/* Tulip field — grouped clusters */
+.tulipField {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 260px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  z-index: 3;
+  padding: 0 10px;
+}
+
+.tulip-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.tulip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(110%);
+  opacity: 0;
+  animation: growUp 1.3s ease-out forwards;
+}
+
+.tulip-head {
+  font-size: 2.2rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.tulip-stem {
+  width: 5px;
+  border-radius: 3px;
+  background: linear-gradient(to top, #1a5c28, #2e8b57, #4caf50);
+}
+
+/* Tall tulips */
+.tulip.tall .tulip-stem  { height: 110px; }
+.tulip.tall .tulip-head  { font-size: 2.5rem; }
+
+/* Medium */
+.tulip.med .tulip-stem   { height: 80px; }
+.tulip.med .tulip-head   { font-size: 2.1rem; }
+
+/* Short */
+.tulip.short .tulip-stem { height: 55px; }
+.tulip.short .tulip-head { font-size: 1.7rem; }
+
+@keyframes growUp {
+  0%   { transform: translateY(100%); opacity: 0; }
+  60%  { transform: translateY(-8px); opacity: 1; }
+  80%  { transform: translateY(4px); }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50%       { transform: rotate(4deg); }
+}
+
+/* Floating petals */
+.petals-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.petal {
+  position: absolute;
+  top: -40px;
+  font-size: 1.4rem;
+  animation: petalFall linear infinite;
+  opacity: 0.75;
+}
+
+@keyframes petalFall {
+  0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+  5%   { opacity: 0.8; }
+  95%  { opacity: 0.6; }
+  100% { transform: translateY(110vh) rotate(720deg) translateX(60px); opacity: 0; }
+}
+
+/* ============================================================
+   FINAL SCREEN
+   ============================================================ */
+#finalScreen {
+  background: radial-gradient(ellipse at 50% 30%, #2a0a3e 0%, #0d0018 60%, #000 100%);
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.final-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.85) 1px, transparent 1px),
+    radial-gradient(rgba(255,200,230,0.5) 1px, transparent 1px);
+  background-size: 70px 70px, 40px 40px;
+  background-position: 0 0, 20px 20px;
+  opacity: 0.25;
+  animation: moveStars 35s linear infinite;
+}
+
+.glassCard {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 860px;
+  padding: 50px 55px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,180,220,0.18);
+  box-shadow:
+    0 0 60px rgba(200,50,150,0.15),
+    0 8px 40px rgba(0,0,0,0.5);
+}
+
+.finalTitle {
+  font-family: 'Great Vibes', cursive;
+  color: #ff76aa;
+  font-size: 4rem;
+  margin-bottom: 30px;
+  text-shadow:
+    0 0 12px rgba(255,118,170,0.8),
+    0 0 30px rgba(255,80,150,0.5),
+    0 0 60px rgba(200,0,120,0.3);
+}
+
+.final-text {
+  color: rgba(255,235,245,0.95);
+  font-size: 1.35rem;
+  line-height: 2.1;
+  white-space: pre-line;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  min-height: 300px;
+  text-shadow: 0 0 8px rgba(255,150,200,0.2);
+}
+
+.final-love {
+  margin-top: 32px;
+  color: #ff94c2;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-shadow:
+    0 0 10px rgba(255,120,180,0.8),
+    0 0 25px rgba(255,80,150,0.5);
+  animation: floatBob 2.5s ease-in-out infinite;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  #welcomeText    { font-size: 4rem; }
+  .cake-title     { font-size: 1.5rem; }
+  .garden-title   { font-size: 1.8rem; }
+  #birthdayHeading { font-size: 3.2rem; }
+  .finalTitle     { font-size: 3rem; }
+  .final-text     { font-size: 1.1rem; }
+  .glassCard      { padding: 28px 22px; }
+  .top    { width: 145px; height: 48px; }
+  .middle { width: 185px; height: 60px; }
+  .bottom { width: 220px; height: 72px; }
+  .candles-on-cake { width: 130px; }
+  .garden-text { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  #welcomeText    { font-size: 3rem; }
+  #birthdayHeading { font-size: 2.4rem; }
+  .garden-title   { font-size: 1.5rem; }
+  .finalTitle     { font-size: 2.4rem; }
+  .final-text     { font-size: 0.95rem; line-height: 1.9; }
+  .magicBtn       { padding: 12px 28px; font-size: 0.9rem; }
+  .tulip-head     { font-size: 1.8rem; }
+  .tulip-stem     { height: 65px; }
+}
